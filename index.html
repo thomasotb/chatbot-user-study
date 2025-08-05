@@ -1,0 +1,29 @@
+<!-- index.html -->
+<h2>Frage: Was ist ein Vektorraum?</h2>
+
+<div style="display: flex; gap: 2em;">
+  <div>
+    <h4>Antwort A</h4>
+    <p>Ein Vektorraum ist eine Menge ... (mit RAG)</p>
+  </div>
+  <div>
+    <h4>Antwort B</h4>
+    <p>Ein Vektorraum besteht aus ... (ohne RAG)</p>
+  </div>
+</div>
+
+<form action="https://formspree.io/f/YOUR_ID" method="POST">
+  <input type="hidden" name="frage" value="Vektorraum" />
+  <input type="hidden" id="vote" name="vote" value="" />
+
+  <button type="button" onclick="vote('A')">Antwort A ist besser</button>
+  <button type="button" onclick="vote('B')">Antwort B ist besser</button>
+  <button type="button" onclick="vote('gleich')">Beide gleich gut</button>
+</form>
+
+<script>
+  function vote(v) {
+    document.getElementById('vote').value = v;
+    document.forms[0].submit();
+  }
+</script>
