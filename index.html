@@ -1,29 +1,125 @@
-<!-- index.html -->
-<h2>Frage: Was ist ein Vektorraum?</h2>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot User Study</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .question-block {
+      background: #fff;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .answers {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+    .answer-box {
+      flex: 1;
+      padding: 1rem;
+      background-color: #f1f1f1;
+      border-radius: 6px;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    button[type="submit"] {
+      padding: 0.6rem 1.2rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .submitted-msg {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
 
-<div style="display: flex; gap: 2em;">
-  <div>
-    <h4>Antwort A</h4>
-    <p>Ein Vektorraum ist eine Menge ... (mit RAG)</p>
-  </div>
-  <div>
-    <h4>Antwort B</h4>
-    <p>Ein Vektorraum besteht aus ... (ohne RAG)</p>
-  </div>
-</div>
+  <h1>🧪 User Study: Welche Antwort ist besser?</h1>
+  <p>Bitte lies dir beide Antworten durch und wähle jeweils die bessere aus.</p>
 
-<form action="https://formspree.io/f/YOUR_ID" method="POST">
-  <input type="hidden" name="frage" value="Vektorraum" />
-  <input type="hidden" id="vote" name="vote" value="" />
+  <form id="voteForm" action="https://formspree.io/f/YOUR_ID" method="POST" onsubmit="handleSubmit(event)">
 
-  <button type="button" onclick="vote('A')">Antwort A ist besser</button>
-  <button type="button" onclick="vote('B')">Antwort B ist besser</button>
-  <button type="button" onclick="vote('gleich')">Beide gleich gut</button>
-</form>
+    <div class="question-block">
+      <h2>Frage 1: Was ist ein Vektorraum?</h2>
+      <div class="answers">
+        <div class="answer-box">
+          <strong>Antwort A:</strong>
+          <p>Ein Vektorraum ist eine algebraische Struktur ... (RAG)</p>
+        </div>
+        <div class="answer-box">
+          <strong>Antwort B:</strong>
+          <p>Ein Vektorraum besteht aus einer Menge ... (ohne RAG)</p>
+        </div>
+      </div>
+      <label><input type="radio" name="vote_q1" value="A" required> Antwort A ist besser</label>
+      <label><input type="radio" name="vote_q1" value="B"> Antwort B ist besser</label>
+      <label><input type="radio" name="vote_q1" value="equal"> Beide gleich gut</label>
+    </div>
 
-<script>
-  function vote(v) {
-    document.getElementById('vote').value = v;
-    document.forms[0].submit();
-  }
-</script>
+    <div class="question-block">
+      <h2>Frage 2: Was ist Retrieval-Augmented Generation?</h2>
+      <div class="answers">
+        <div class="answer-box">
+          <strong>Antwort A:</strong>
+          <p>RAG kombiniert ein Retrieval-Modul mit einem LLM ... (RAG)</p>
+        </div>
+        <div class="answer-box">
+          <strong>Antwort B:</strong>
+          <p>RAG ist ein Textgenerierungssystem, das Informationen verwendet ... (ohne RAG)</p>
+        </div>
+      </div>
+      <label><input type="radio" name="vote_q2" value="A" required> Antwort A ist besser</label>
+      <label><input type="radio" name="vote_q2" value="B"> Antwort B ist besser</label>
+      <label><input type="radio" name="vote_q2" value="equal"> Beide gleich gut</label>
+    </div>
+
+    <div class="question-block">
+      <h2>Frage 3: Wie funktioniert ein Autoencoder?</h2>
+      <div class="answers">
+        <div class="answer-box">
+          <strong>Antwort A:</strong>
+          <p>Ein Autoencoder komprimiert Daten in einen latenten Raum ... (RAG)</p>
+        </div>
+        <div class="answer-box">
+          <strong>Antwort B:</strong>
+          <p>Autoencoder bestehen aus Encoder-Decoder-Architektur ... (ohne RAG)</p>
+        </div>
+      </div>
+      <label><input type="radio" name="vote_q3" value="A" required> Antwort A ist besser</label>
+      <label><input type="radio" name="vote_q3" value="B"> Antwort B ist besser</label>
+      <label><input type="radio" name="vote_q3" value="equal"> Beide gleich gut</label>
+    </div>
+
+    <button type="submit">📝 Antworten absenden</button>
+    <p id="submittedMsg" class="submitted-msg" style="display:none;">✅ Vielen Dank! Deine Bewertung wurde gesendet.</p>
+  </form>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      document.getElementById("voteForm").submit();
+      document.getElementById("submittedMsg").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
