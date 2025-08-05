@@ -56,7 +56,8 @@
   <h1>🧪 User Study: Welche Antwort ist besser?</h1>
   <p>Bitte lies dir beide Antworten durch und wähle jeweils die bessere aus.</p>
 
-  <form id="voteForm" action="https://formspree.io/f/YOUR_ID" method="POST" onsubmit="handleSubmit(event)">
+  <!-- <form id="voteForm" action="https://formspree.io/f/YOUR_ID" method="POST" onsubmit="handleSubmit(event)"></form> -->
+  <form id="voteForm" onsubmit="handleSubmit(event)">
 
     <div class="question-block">
       <h2>Frage 1: Was ist ein Vektorraum?</h2>
@@ -116,8 +117,22 @@
   <script>
     function handleSubmit(event) {
       event.preventDefault();
-      document.getElementById("voteForm").submit();
+	
+      document.querySelector("button[type='submit']").disabled = true;
+
+      // werte die submittet werden
+      const votes = {
+        frage1: document.querySelector('input[name="vote_q1"]:checked')?.value,
+        frage2: document.querySelector('input[name="vote_q2"]:checked')?.value,
+        frage3: document.querySelector('input[name="vote_q3"]:checked')?.value,
+        timestamp: new Date().toISOString(),
+      };
+
+      console.log("📥 Neue Eingabe übermittelt:", votes);
+
+      // document.getElementById("voteForm").submit();  
       document.getElementById("submittedMsg").style.display = "block";
+      document.querySelector("button[type='submit']").disabled = true;
     }
   </script>
 
